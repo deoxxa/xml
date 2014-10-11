@@ -1,3 +1,7 @@
+// This package implements the algorithm described in the
+// xml-c14n (http://www.w3.org/TR/xml-c14n) documentation. It is largely a port
+// of my javascript module (https://github.com/deoxxa/xml-c14n) which does the
+// same thing.
 package c14n
 
 import (
@@ -10,11 +14,43 @@ import (
 )
 
 var (
-	ERR_EOB               = errors.New("end of branch")
-	ERR_UNKNOWN_PREFIX    = errors.New("unknown prefix")
+	ERR_UNKNOWN_PREFIX    = errors.New("unknown namespace prefix")
 	ERR_UNKNOWN_TOKEN     = errors.New("unrecognised token type")
 	ERR_INVALID_STRUCTURE = errors.New("invalid document structure")
+	err_eob               = errors.New("end of branch")
 )
+
+// Canonicalise is the only exported method of this package. It takes an
+// `xml.Decoder` and reads tokens from it, writing the canonlicalised XML stream
+// to an `io.Writer`.
+//
+// If canonicalisation is successful, the return value will be nil. If there are
+// any problems during canonicalisation, the return value will be an error
+// object. If the error originates within this package, it will be one of the
+// errors above. If the error originates outside this package, it will be passed
+// through as-is.
+//
+// The `withComments` parameter controls whether or not the output XML has the
+// comments stripped or not. If it is false, they will be stripped. If it is
+// true, they will be retained.
+//
+// Right now there is no support for the "inclusive namespaces" feature from the
+// specification.
+func Canonicalise(xmlIn *xml.Decoder, xmlOut io.WriteCloser, withComments bool) error {
+	seenDocument := false
+
+	for {
+		if wasDocument, err := processInner(xmlIn, xmlOut, seenDocument, false, prefixList{}, prefixList{}, "", withComments); err == io.EOF {
+			break
+		} else if err != nil {
+			return err
+		} else if wasDocument {
+			seenDocument = wasDocument
+		}
+	}
+
+	return nil
+}
 
 func escapeEntities(w io.Writer, data []byte, rep map[rune][]byte) error {
 	last := 0
@@ -113,22 +149,6 @@ func (l attributeList) Less(i, j int) bool {
 	}
 }
 
-func Canonicalise(xmlIn *xml.Decoder, xmlOut io.WriteCloser, withComments bool) error {
-	seenDocument := false
-
-	for {
-		if wasDocument, err := processInner(xmlIn, xmlOut, seenDocument, false, prefixList{}, prefixList{}, "", withComments); err == io.EOF {
-			break
-		} else if err != nil {
-			return err
-		} else if wasDocument {
-			seenDocument = wasDocument
-		}
-	}
-
-	return nil
-}
-
 func processInner(xmlIn *xml.Decoder, xmlOut io.WriteCloser, seenDocument bool, insideDocument bool, knownPrefixes prefixList, renderedPrefixes prefixList, defaultNamespace string, withComments bool) (bool, error) {
 	token, err := xmlIn.RawToken()
 	if err != nil {
@@ -213,7 +233,7 @@ func processInner(xmlIn *xml.Decoder, xmlOut io.WriteCloser, seenDocument bool, 
 	}
 
 	if _, ok := token.(xml.EndElement); ok {
-		return false, ERR_EOB
+		return false, err_eob
 	}
 
 	if startElement, ok := token.(xml.StartElement); ok {
@@ -248,7 +268,7 @@ func processInner(xmlIn *xml.Decoder, xmlOut io.WriteCloser, seenDocument bool, 
 		}
 
 		for {
-			if _, err := processInner(xmlIn, xmlOut, seenDocument, true, newKnownPrefixes, newRenderedPrefixes, newDefaultNamespace, withComments); err == ERR_EOB {
+			if _, err := processInner(xmlIn, xmlOut, seenDocument, true, newKnownPrefixes, newRenderedPrefixes, newDefaultNamespace, withComments); err == err_eob {
 				break
 			} else if err != nil {
 				return true, err
