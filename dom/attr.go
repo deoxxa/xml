@@ -12,15 +12,21 @@ type IAttr interface {
 	SetValue(value string)
 	GetOwnerElement() IElement
 	SetOwnerElement(ownerElement IElement)
+	GetSchemaTypeInfo() ITypeInfo
+	SetSchemaTypeInfo(schemaTypeInfo ITypeInfo)
+	GetIsId() bool
+	SetIsId(isId bool)
 	// no spec-defined functions
 }
 
 type Attr struct {
 	Node
-	name         string
-	specified    bool
-	value        string
-	ownerElement IElement
+	name           string
+	specified      bool
+	value          string
+	ownerElement   IElement
+	schemaTypeInfo ITypeInfo
+	isId           bool
 }
 
 func (a Attr) GetName() string {
@@ -53,4 +59,20 @@ func (a Attr) GetOwnerElement() IElement {
 
 func (a Attr) SetOwnerElement(ownerElement IElement) {
 	a.ownerElement = ownerElement
+}
+
+func (a Attr) GetSchemaTypeInfo() ITypeInfo {
+	return a.schemaTypeInfo
+}
+
+func (a Attr) SetSchemaTypeInfo(schemaTypeInfo ITypeInfo) {
+	a.schemaTypeInfo = schemaTypeInfo
+}
+
+func (a Attr) GetIsId() bool {
+	return a.isId
+}
+
+func (a Attr) SetIsId(isId bool) {
+	a.isId = isId
 }

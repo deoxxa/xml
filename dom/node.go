@@ -30,6 +30,10 @@ type INode interface {
 	SetPrefix(prefix string)
 	GetLocalName() string
 	SetLocalName(localName string)
+	GetBaseURI() string
+	SetBaseURI(baseURI string)
+	GetTextContent() string
+	SetTextContent(textContent string)
 	// spec-defined functions
 	InsertBefore(newChild INode, refChild INode) INode
 	ReplaceChild(newChild INode, oldChild INode) INode
@@ -40,7 +44,37 @@ type INode interface {
 	Normalize()
 	IsSupported(feature string, version string) bool
 	HasAttributes() bool
+	CompareDocumentPosition(other INode) int16
+	IsSameNode(other INode) bool
+	LookupPrefix(namespaceURI string) string
+	IsDefaultNamespace(namespaceURI string) bool
+	LookupNamespaceURI(prefix string) string
+	IsEqualNode(arg INode) bool
+	GetFeature(feature string, version string) IDOMObject
+	SetUserData(key string, data IDOMUserData, handler IUserDataHandler) IDOMUserData
+	GetUserData(key string) IDOMUserData
 }
+
+const (
+	ELEMENT_NODE                              = 1
+	ATTRIBUTE_NODE                            = 2
+	TEXT_NODE                                 = 3
+	CDATA_SECTION_NODE                        = 4
+	ENTITY_REFERENCE_NODE                     = 5
+	ENTITY_NODE                               = 6
+	PROCESSING_INSTRUCTION_NODE               = 7
+	COMMENT_NODE                              = 8
+	DOCUMENT_NODE                             = 9
+	DOCUMENT_TYPE_NODE                        = 10
+	DOCUMENT_FRAGMENT_NODE                    = 11
+	NOTATION_NODE                             = 12
+	DOCUMENT_POSITION_DISCONNECTED            = 0x01
+	DOCUMENT_POSITION_PRECEDING               = 0x02
+	DOCUMENT_POSITION_FOLLOWING               = 0x04
+	DOCUMENT_POSITION_CONTAINS                = 0x08
+	DOCUMENT_POSITION_CONTAINED_BY            = 0x10
+	DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20
+)
 
 type Node struct {
 	nodeName        string
@@ -57,6 +91,8 @@ type Node struct {
 	namespaceURI    string
 	prefix          string
 	localName       string
+	baseURI         string
+	textContent     string
 }
 
 func (n Node) GetNodeName() string {
@@ -171,38 +207,126 @@ func (n Node) SetLocalName(localName string) {
 	n.localName = localName
 }
 
+func (n Node) GetBaseURI() string {
+	return n.baseURI
+}
+
+func (n Node) SetBaseURI(baseURI string) {
+	n.baseURI = baseURI
+}
+
+func (n Node) GetTextContent() string {
+	return n.textContent
+}
+
+func (n Node) SetTextContent(textContent string) {
+	n.textContent = textContent
+}
+
 func (n Node) InsertBefore(newChild INode, refChild INode) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n Node) ReplaceChild(newChild INode, oldChild INode) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n Node) RemoveChild(oldChild INode) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n Node) AppendChild(newChild INode) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n Node) HasChildNodes() bool {
+	panic("unimplemented") // TODO
+
 	return false
 }
 
 func (n Node) CloneNode(deep bool) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n Node) Normalize() {
+	panic("unimplemented") // TODO
+
 	return
 }
 
 func (n Node) IsSupported(feature string, version string) bool {
+	panic("unimplemented") // TODO
+
 	return false
 }
 
 func (n Node) HasAttributes() bool {
+	panic("unimplemented") // TODO
+
 	return false
+}
+
+func (n Node) CompareDocumentPosition(other INode) int16 {
+	panic("unimplemented") // TODO
+
+	return 0
+}
+
+func (n Node) IsSameNode(other INode) bool {
+	panic("unimplemented") // TODO
+
+	return false
+}
+
+func (n Node) LookupPrefix(namespaceURI string) string {
+	panic("unimplemented") // TODO
+
+	return ""
+}
+
+func (n Node) IsDefaultNamespace(namespaceURI string) bool {
+	panic("unimplemented") // TODO
+
+	return false
+}
+
+func (n Node) LookupNamespaceURI(prefix string) string {
+	panic("unimplemented") // TODO
+
+	return ""
+}
+
+func (n Node) IsEqualNode(arg INode) bool {
+	panic("unimplemented") // TODO
+
+	return false
+}
+
+func (n Node) GetFeature(feature string, version string) IDOMObject {
+	panic("unimplemented") // TODO
+
+	return nil
+}
+
+func (n Node) SetUserData(key string, data IDOMUserData, handler IUserDataHandler) IDOMUserData {
+	panic("unimplemented") // TODO
+
+	return nil
+}
+
+func (n Node) GetUserData(key string) IDOMUserData {
+	panic("unimplemented") // TODO
+
+	return nil
 }

@@ -27,29 +27,43 @@ func (n NamedNodeMap) SetLength(length int32) {
 }
 
 func (n NamedNodeMap) GetNamedItem(name string) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n NamedNodeMap) SetNamedItem(arg INode) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n NamedNodeMap) RemoveNamedItem(name string) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n NamedNodeMap) Item(index int32) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n NamedNodeMap) GetNamedItemNS(namespaceURI string, localName string) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n NamedNodeMap) SetNamedItemNS(arg INode) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
 
 func (n NamedNodeMap) RemoveNamedItemNS(namespaceURI string, localName string) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }

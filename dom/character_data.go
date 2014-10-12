@@ -39,21 +39,31 @@ func (c CharacterData) SetLength(length int32) {
 }
 
 func (c CharacterData) SubstringData(offset int32, count int32) string {
+	panic("unimplemented") // TODO
+
 	return ""
 }
 
 func (c CharacterData) AppendData(arg string) {
+	panic("unimplemented") // TODO
+
 	return
 }
 
 func (c CharacterData) InsertData(offset int32, arg string) {
+	panic("unimplemented") // TODO
+
 	return
 }
 
 func (c CharacterData) DeleteData(offset int32, count int32) {
+	panic("unimplemented") // TODO
+
 	return
 }
 
 func (c CharacterData) ReplaceData(offset int32, count int32, arg string) {
+	panic("unimplemented") // TODO
+
 	return
 }

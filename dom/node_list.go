@@ -21,5 +21,7 @@ func (n NodeList) SetLength(length int32) {
 }
 
 func (n NodeList) Item(index int32) INode {
+	panic("unimplemented") // TODO
+
 	return nil
 }
