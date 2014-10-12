@@ -1,4 +1,4 @@
 package dom
 
-type IDOMUserData interface{}
-type IDOMObject interface{}
+type DOMUserData interface{}
+type DOMObject interface{}

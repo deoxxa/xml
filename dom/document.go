@@ -4,16 +4,16 @@ import (
 	"strings"
 )
 
-type IDocument interface {
-	INode
+type Document interface {
+	Node
 
 	// accessors
-	GetDoctype() IDocumentType
-	SetDoctype(doctype IDocumentType)
-	GetImplementation() IDOMImplementation
-	SetImplementation(implementation IDOMImplementation)
-	GetDocumentElement() IElement
-	SetDocumentElement(documentElement IElement)
+	GetDoctype() DocumentType
+	SetDoctype(doctype DocumentType)
+	GetImplementation() DOMImplementation
+	SetImplementation(implementation DOMImplementation)
+	GetDocumentElement() Element
+	SetDocumentElement(documentElement Element)
 	GetInputEncoding() string
 	SetInputEncoding(inputEncoding string)
 	GetXmlEncoding() string
@@ -26,197 +26,197 @@ type IDocument interface {
 	SetStrictErrorChecking(strictErrorChecking bool)
 	GetDocumentURI() string
 	SetDocumentURI(documentURI string)
-	GetDomConfig() IDOMConfiguration
-	SetDomConfig(domConfig IDOMConfiguration)
+	GetDomConfig() DOMConfiguration
+	SetDomConfig(domConfig DOMConfiguration)
 	// spec-defined functions
-	CreateElement(tagName string) IElement
-	CreateDocumentFragment() IDocumentFragment
-	CreateTextNode(data string) IText
-	CreateComment(data string) IComment
-	CreateCDATASection(data string) ICDATASection
-	CreateProcessingInstruction(target string, data string) IProcessingInstruction
-	CreateAttribute(name string) IAttr
-	CreateEntityReference(name string) IEntityReference
-	GetElementsByTagName(tagname string) INodeList
-	ImportNode(importedNode INode, deep bool) INode
-	CreateElementNS(namespaceURI string, qualifiedName string) IElement
-	CreateAttributeNS(namespaceURI string, qualifiedName string) IAttr
-	GetElementsByTagNameNS(namespaceURI string, localName string) INodeList
-	GetElementById(elementId string) IElement
-	AdoptNode(source INode) INode
+	CreateElement(tagName string) Element
+	CreateDocumentFragment() DocumentFragment
+	CreateTextNode(data string) Text
+	CreateComment(data string) Comment
+	CreateCDATASection(data string) CDATASection
+	CreateProcessingInstruction(target string, data string) ProcessingInstruction
+	CreateAttribute(name string) Attr
+	CreateEntityReference(name string) EntityReference
+	GetElementsByTagName(tagname string) NodeList
+	ImportNode(importedNode Node, deep bool) Node
+	CreateElementNS(namespaceURI string, qualifiedName string) Element
+	CreateAttributeNS(namespaceURI string, qualifiedName string) Attr
+	GetElementsByTagNameNS(namespaceURI string, localName string) NodeList
+	GetElementById(elementId string) Element
+	AdoptNode(source Node) Node
 	NormalizeDocument()
-	RenameNode(n INode, namespaceURI string, qualifiedName string) INode
+	RenameNode(n Node, namespaceURI string, qualifiedName string) Node
 }
 
-type Document struct {
-	Node
-	doctype             IDocumentType
-	implementation      IDOMImplementation
-	documentElement     IElement
+type DocumentImpl struct {
+	NodeImpl
+	doctype             DocumentType
+	implementation      DOMImplementation
+	documentElement     Element
 	inputEncoding       string
 	xmlEncoding         string
 	xmlStandalone       bool
 	xmlVersion          string
 	strictErrorChecking bool
 	documentURI         string
-	domConfig           IDOMConfiguration
+	domConfig           DOMConfiguration
 }
 
-func (d *Document) GetDoctype() IDocumentType {
+func (d *DocumentImpl) GetDoctype() DocumentType {
 	return d.doctype
 }
 
-func (d *Document) SetDoctype(doctype IDocumentType) {
+func (d *DocumentImpl) SetDoctype(doctype DocumentType) {
 	d.doctype = doctype
 }
 
-func (d *Document) GetImplementation() IDOMImplementation {
+func (d *DocumentImpl) GetImplementation() DOMImplementation {
 	return d.implementation
 }
 
-func (d *Document) SetImplementation(implementation IDOMImplementation) {
+func (d *DocumentImpl) SetImplementation(implementation DOMImplementation) {
 	d.implementation = implementation
 }
 
-func (d *Document) GetDocumentElement() IElement {
+func (d *DocumentImpl) GetDocumentElement() Element {
 	return d.documentElement
 }
 
-func (d *Document) SetDocumentElement(documentElement IElement) {
+func (d *DocumentImpl) SetDocumentElement(documentElement Element) {
 	d.documentElement = documentElement
 }
 
-func (d *Document) GetInputEncoding() string {
+func (d *DocumentImpl) GetInputEncoding() string {
 	return d.inputEncoding
 }
 
-func (d *Document) SetInputEncoding(inputEncoding string) {
+func (d *DocumentImpl) SetInputEncoding(inputEncoding string) {
 	d.inputEncoding = inputEncoding
 }
 
-func (d *Document) GetXmlEncoding() string {
+func (d *DocumentImpl) GetXmlEncoding() string {
 	return d.xmlEncoding
 }
 
-func (d *Document) SetXmlEncoding(xmlEncoding string) {
+func (d *DocumentImpl) SetXmlEncoding(xmlEncoding string) {
 	d.xmlEncoding = xmlEncoding
 }
 
-func (d *Document) GetXmlStandalone() bool {
+func (d *DocumentImpl) GetXmlStandalone() bool {
 	return d.xmlStandalone
 }
 
-func (d *Document) SetXmlStandalone(xmlStandalone bool) {
+func (d *DocumentImpl) SetXmlStandalone(xmlStandalone bool) {
 	d.xmlStandalone = xmlStandalone
 }
 
-func (d *Document) GetXmlVersion() string {
+func (d *DocumentImpl) GetXmlVersion() string {
 	return d.xmlVersion
 }
 
-func (d *Document) SetXmlVersion(xmlVersion string) {
+func (d *DocumentImpl) SetXmlVersion(xmlVersion string) {
 	d.xmlVersion = xmlVersion
 }
 
-func (d *Document) GetStrictErrorChecking() bool {
+func (d *DocumentImpl) GetStrictErrorChecking() bool {
 	return d.strictErrorChecking
 }
 
-func (d *Document) SetStrictErrorChecking(strictErrorChecking bool) {
+func (d *DocumentImpl) SetStrictErrorChecking(strictErrorChecking bool) {
 	d.strictErrorChecking = strictErrorChecking
 }
 
-func (d *Document) GetDocumentURI() string {
+func (d *DocumentImpl) GetDocumentURI() string {
 	return d.documentURI
 }
 
-func (d *Document) SetDocumentURI(documentURI string) {
+func (d *DocumentImpl) SetDocumentURI(documentURI string) {
 	d.documentURI = documentURI
 }
 
-func (d *Document) GetDomConfig() IDOMConfiguration {
+func (d *DocumentImpl) GetDomConfig() DOMConfiguration {
 	return d.domConfig
 }
 
-func (d *Document) SetDomConfig(domConfig IDOMConfiguration) {
+func (d *DocumentImpl) SetDomConfig(domConfig DOMConfiguration) {
 	d.domConfig = domConfig
 }
 
-func (d *Document) InsertBefore(newChild INode, refChild INode) INode {
+func (d *DocumentImpl) InsertBefore(newChild Node, refChild Node) Node {
 	if d.documentElement == nil {
-		d.documentElement = newChild.(*Element)
+		d.documentElement = newChild.(*ElementImpl)
 
-		return d.Node.InsertBefore(newChild, refChild)
+		return d.NodeImpl.InsertBefore(newChild, refChild)
 	} else {
 		return d.documentElement.InsertBefore(newChild, refChild)
 	}
 }
 
-func (d *Document) AppendChild(newChild INode) INode {
+func (d *DocumentImpl) AppendChild(newChild Node) Node {
 	return d.InsertBefore(newChild, nil)
 }
 
-func (d *Document) CreateElement(tagName string) IElement {
+func (d *DocumentImpl) CreateElement(tagName string) Element {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) CreateDocumentFragment() IDocumentFragment {
+func (d *DocumentImpl) CreateDocumentFragment() DocumentFragment {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) CreateTextNode(data string) IText {
+func (d *DocumentImpl) CreateTextNode(data string) Text {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) CreateComment(data string) IComment {
+func (d *DocumentImpl) CreateComment(data string) Comment {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) CreateCDATASection(data string) ICDATASection {
+func (d *DocumentImpl) CreateCDATASection(data string) CDATASection {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) CreateProcessingInstruction(target string, data string) IProcessingInstruction {
+func (d *DocumentImpl) CreateProcessingInstruction(target string, data string) ProcessingInstruction {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) CreateAttribute(name string) IAttr {
+func (d *DocumentImpl) CreateAttribute(name string) Attr {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) CreateEntityReference(name string) IEntityReference {
+func (d *DocumentImpl) CreateEntityReference(name string) EntityReference {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) GetElementsByTagName(tagname string) INodeList {
+func (d *DocumentImpl) GetElementsByTagName(tagname string) NodeList {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) ImportNode(importedNode INode, deep bool) INode {
+func (d *DocumentImpl) ImportNode(importedNode Node, deep bool) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) CreateElementNS(namespaceURI string, qualifiedName string) IElement {
+func (d *DocumentImpl) CreateElementNS(namespaceURI string, qualifiedName string) Element {
 	index := strings.LastIndex(qualifiedName, ":")
 
 	var prefix, localName string
@@ -228,11 +228,11 @@ func (d *Document) CreateElementNS(namespaceURI string, qualifiedName string) IE
 		localName = qualifiedName
 	}
 
-	return &Element{
-		Node: Node{
+	return &ElementImpl{
+		NodeImpl: NodeImpl{
 			nodeName:      qualifiedName,
-			childNodes:    NodeList{},
-			attributes:    &NamedNodeMap{},
+			childNodes:    NodeListImpl{},
+			attributes:    &NamedNodeMapImpl{},
 			ownerDocument: d,
 			namespaceURI:  namespaceURI,
 			prefix:        prefix,
@@ -242,37 +242,37 @@ func (d *Document) CreateElementNS(namespaceURI string, qualifiedName string) IE
 	}
 }
 
-func (d *Document) CreateAttributeNS(namespaceURI string, qualifiedName string) IAttr {
+func (d *DocumentImpl) CreateAttributeNS(namespaceURI string, qualifiedName string) Attr {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) GetElementsByTagNameNS(namespaceURI string, localName string) INodeList {
+func (d *DocumentImpl) GetElementsByTagNameNS(namespaceURI string, localName string) NodeList {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) GetElementById(elementId string) IElement {
+func (d *DocumentImpl) GetElementById(elementId string) Element {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) AdoptNode(source INode) INode {
+func (d *DocumentImpl) AdoptNode(source Node) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *Document) NormalizeDocument() {
+func (d *DocumentImpl) NormalizeDocument() {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (d *Document) RenameNode(n INode, namespaceURI string, qualifiedName string) INode {
+func (d *DocumentImpl) RenameNode(n Node, namespaceURI string, qualifiedName string) Node {
 	panic("unimplemented") // TODO
 
 	return nil

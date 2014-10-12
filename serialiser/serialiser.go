@@ -11,9 +11,9 @@ var (
 	ERR_UNHANDLED_NODE = errors.New("unhandled node type")
 )
 
-func Serialise(node dom.INode) (string, error) {
+func Serialise(node dom.Node) (string, error) {
 	switch t := node.(type) {
-	case *dom.Document:
+	case *dom.DocumentImpl:
 		return Serialise(t.GetDocumentElement())
 	default:
 		if xml, err := serialise(node); err != nil {
@@ -24,9 +24,9 @@ func Serialise(node dom.INode) (string, error) {
 	}
 }
 
-func serialise(node dom.INode) ([]string, error) {
+func serialise(node dom.Node) ([]string, error) {
 	switch t := node.(type) {
-	case *dom.Element:
+	case *dom.ElementImpl:
 		xml := []string{}
 
 		xml = append(xml, "<"+t.GetNodeName()+">")

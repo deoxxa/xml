@@ -1,7 +1,7 @@
 package dom
 
-type IAttr interface {
-	INode
+type Attr interface {
+	Node
 
 	// accessors
 	GetName() string
@@ -10,69 +10,69 @@ type IAttr interface {
 	SetSpecified(specified bool)
 	GetValue() string
 	SetValue(value string)
-	GetOwnerElement() IElement
-	SetOwnerElement(ownerElement IElement)
-	GetSchemaTypeInfo() ITypeInfo
-	SetSchemaTypeInfo(schemaTypeInfo ITypeInfo)
+	GetOwnerElement() Element
+	SetOwnerElement(ownerElement Element)
+	GetSchemaTypeInfo() TypeInfo
+	SetSchemaTypeInfo(schemaTypeInfo TypeInfo)
 	GetIsId() bool
 	SetIsId(isId bool)
 	// no spec-defined functions
 }
 
-type Attr struct {
-	Node
+type AttrImpl struct {
+	NodeImpl
 	name           string
 	specified      bool
 	value          string
-	ownerElement   IElement
-	schemaTypeInfo ITypeInfo
+	ownerElement   Element
+	schemaTypeInfo TypeInfo
 	isId           bool
 }
 
-func (a *Attr) GetName() string {
+func (a *AttrImpl) GetName() string {
 	return a.name
 }
 
-func (a *Attr) SetName(name string) {
+func (a *AttrImpl) SetName(name string) {
 	a.name = name
 }
 
-func (a *Attr) GetSpecified() bool {
+func (a *AttrImpl) GetSpecified() bool {
 	return a.specified
 }
 
-func (a *Attr) SetSpecified(specified bool) {
+func (a *AttrImpl) SetSpecified(specified bool) {
 	a.specified = specified
 }
 
-func (a *Attr) GetValue() string {
+func (a *AttrImpl) GetValue() string {
 	return a.value
 }
 
-func (a *Attr) SetValue(value string) {
+func (a *AttrImpl) SetValue(value string) {
 	a.value = value
 }
 
-func (a *Attr) GetOwnerElement() IElement {
+func (a *AttrImpl) GetOwnerElement() Element {
 	return a.ownerElement
 }
 
-func (a *Attr) SetOwnerElement(ownerElement IElement) {
+func (a *AttrImpl) SetOwnerElement(ownerElement Element) {
 	a.ownerElement = ownerElement
 }
 
-func (a *Attr) GetSchemaTypeInfo() ITypeInfo {
+func (a *AttrImpl) GetSchemaTypeInfo() TypeInfo {
 	return a.schemaTypeInfo
 }
 
-func (a *Attr) SetSchemaTypeInfo(schemaTypeInfo ITypeInfo) {
+func (a *AttrImpl) SetSchemaTypeInfo(schemaTypeInfo TypeInfo) {
 	a.schemaTypeInfo = schemaTypeInfo
 }
 
-func (a *Attr) GetIsId() bool {
+func (a *AttrImpl) GetIsId() bool {
 	return a.isId
 }
 
-func (a *Attr) SetIsId(isId bool) {
+func (a *AttrImpl) SetIsId(isId bool) {
 	a.isId = isId
 }

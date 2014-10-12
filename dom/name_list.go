@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-type INameList interface {
+type NameList interface {
 	// accessors
 	GetLength() int
 	// spec-defined functions
@@ -14,13 +14,13 @@ type INameList interface {
 	ContainsNS(namespaceURI string, name string) bool
 }
 
-type NameList []string
+type NameListImpl []string
 
-func (n NameList) GetLength() int {
+func (n NameListImpl) GetLength() int {
 	return len(n)
 }
 
-func (n NameList) GetName(index int) string {
+func (n NameListImpl) GetName(index int) string {
 	str := n[index]
 
 	i := strings.Index(str, "}")
@@ -28,7 +28,7 @@ func (n NameList) GetName(index int) string {
 	return str[i:]
 }
 
-func (n NameList) GetNamespaceURI(index int) string {
+func (n NameListImpl) GetNamespaceURI(index int) string {
 	str := n[index]
 
 	i := strings.Index(str, "}")
@@ -36,11 +36,11 @@ func (n NameList) GetNamespaceURI(index int) string {
 	return str[1:i]
 }
 
-func (n NameList) Contains(str string) bool {
+func (n NameListImpl) Contains(str string) bool {
 	return n.ContainsNS("", str)
 }
 
-func (n NameList) ContainsNS(namespaceURI string, name string) bool {
+func (n NameListImpl) ContainsNS(namespaceURI string, name string) bool {
 	str := "{" + namespaceURI + "}" + name
 
 	for _, v := range n {

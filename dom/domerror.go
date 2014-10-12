@@ -1,6 +1,6 @@
 package dom
 
-type IDOMError interface {
+type DOMError interface {
 	// accessors
 	GetSeverity() int16
 	SetSeverity(severity int16)
@@ -8,12 +8,12 @@ type IDOMError interface {
 	SetMessage(message string)
 	GetType() string
 	SetType(theType string)
-	GetRelatedException() IDOMObject
-	SetRelatedException(relatedException IDOMObject)
-	GetRelatedData() IDOMObject
-	SetRelatedData(relatedData IDOMObject)
-	GetLocation() IDOMLocator
-	SetLocation(location IDOMLocator)
+	GetRelatedException() DOMObject
+	SetRelatedException(relatedException DOMObject)
+	GetRelatedData() DOMObject
+	SetRelatedData(relatedData DOMObject)
+	GetLocation() DOMLocator
+	SetLocation(location DOMLocator)
 	// no spec-defined functions
 }
 
@@ -23,59 +23,59 @@ const (
 	SEVERITY_FATAL_ERROR = 3
 )
 
-type DOMError struct {
+type DOMErrorImpl struct {
 	severity         int16
 	message          string
 	theType          string
-	relatedException IDOMObject
-	relatedData      IDOMObject
-	location         IDOMLocator
+	relatedException DOMObject
+	relatedData      DOMObject
+	location         DOMLocator
 }
 
-func (d *DOMError) GetSeverity() int16 {
+func (d *DOMErrorImpl) GetSeverity() int16 {
 	return d.severity
 }
 
-func (d *DOMError) SetSeverity(severity int16) {
+func (d *DOMErrorImpl) SetSeverity(severity int16) {
 	d.severity = severity
 }
 
-func (d *DOMError) GetMessage() string {
+func (d *DOMErrorImpl) GetMessage() string {
 	return d.message
 }
 
-func (d *DOMError) SetMessage(message string) {
+func (d *DOMErrorImpl) SetMessage(message string) {
 	d.message = message
 }
 
-func (d *DOMError) GetType() string {
+func (d *DOMErrorImpl) GetType() string {
 	return d.theType
 }
 
-func (d *DOMError) SetType(theType string) {
+func (d *DOMErrorImpl) SetType(theType string) {
 	d.theType = theType
 }
 
-func (d *DOMError) GetRelatedException() IDOMObject {
+func (d *DOMErrorImpl) GetRelatedException() DOMObject {
 	return d.relatedException
 }
 
-func (d *DOMError) SetRelatedException(relatedException IDOMObject) {
+func (d *DOMErrorImpl) SetRelatedException(relatedException DOMObject) {
 	d.relatedException = relatedException
 }
 
-func (d *DOMError) GetRelatedData() IDOMObject {
+func (d *DOMErrorImpl) GetRelatedData() DOMObject {
 	return d.relatedData
 }
 
-func (d *DOMError) SetRelatedData(relatedData IDOMObject) {
+func (d *DOMErrorImpl) SetRelatedData(relatedData DOMObject) {
 	d.relatedData = relatedData
 }
 
-func (d *DOMError) GetLocation() IDOMLocator {
+func (d *DOMErrorImpl) GetLocation() DOMLocator {
 	return d.location
 }
 
-func (d *DOMError) SetLocation(location IDOMLocator) {
+func (d *DOMErrorImpl) SetLocation(location DOMLocator) {
 	d.location = location
 }

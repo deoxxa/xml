@@ -1,9 +1,9 @@
 package dom
 
-type IUserDataHandler interface {
+type UserDataHandler interface {
 	// no accessors
 	// spec-defined functions
-	Handle(operation int16, key string, data IDOMUserData, src INode, dst INode)
+	Handle(operation int16, key string, data DOMUserData, src Node, dst Node)
 }
 
 const (
@@ -14,10 +14,10 @@ const (
 	NODE_ADOPTED  = 5
 )
 
-type UserDataHandler struct {
+type UserDataHandlerImpl struct {
 }
 
-func (u *UserDataHandler) Handle(operation int16, key string, data IDOMUserData, src INode, dst INode) {
+func (u *UserDataHandlerImpl) Handle(operation int16, key string, data DOMUserData, src Node, dst Node) {
 	panic("unimplemented") // TODO
 
 	return

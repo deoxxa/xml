@@ -1,7 +1,7 @@
 package dom
 
-type INotation interface {
-	INode
+type Notation interface {
+	Node
 
 	// accessors
 	GetPublicId() string
@@ -11,24 +11,24 @@ type INotation interface {
 	// no spec-defined functions
 }
 
-type Notation struct {
-	Node
+type NotationImpl struct {
+	NodeImpl
 	publicId string
 	systemId string
 }
 
-func (n *Notation) GetPublicId() string {
+func (n *NotationImpl) GetPublicId() string {
 	return n.publicId
 }
 
-func (n *Notation) SetPublicId(publicId string) {
+func (n *NotationImpl) SetPublicId(publicId string) {
 	n.publicId = publicId
 }
 
-func (n *Notation) GetSystemId() string {
+func (n *NotationImpl) GetSystemId() string {
 	return n.systemId
 }
 
-func (n *Notation) SetSystemId(systemId string) {
+func (n *NotationImpl) SetSystemId(systemId string) {
 	n.systemId = systemId
 }

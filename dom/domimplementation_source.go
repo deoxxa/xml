@@ -1,22 +1,22 @@
 package dom
 
-type IDOMImplementationSource interface {
+type DOMImplementationSource interface {
 	// no accessors
 	// spec-defined functions
-	GetDOMImplementation(features string) IDOMImplementation
-	GetDOMImplementationList(features string) IDOMImplementationList
+	GetDOMImplementation(features string) DOMImplementation
+	GetDOMImplementationList(features string) DOMImplementationList
 }
 
-type DOMImplementationSource struct {
+type DOMImplementationSourceImpl struct {
 }
 
-func (d DOMImplementationSource) GetDOMImplementation(features string) IDOMImplementation {
+func (d DOMImplementationSourceImpl) GetDOMImplementation(features string) DOMImplementation {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d DOMImplementationSource) GetDOMImplementationList(features string) IDOMImplementationList {
+func (d DOMImplementationSourceImpl) GetDOMImplementationList(features string) DOMImplementationList {
 	panic("unimplemented") // TODO
 
 	return nil

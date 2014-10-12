@@ -1,15 +1,15 @@
 package dom
 
-type IDOMErrorHandler interface {
+type DOMErrorHandler interface {
 	// no accessors
 	// spec-defined functions
-	HandleError(error IDOMError) bool
+	HandleError(error DOMError) bool
 }
 
-type DOMErrorHandler struct {
+type DOMErrorHandlerImpl struct {
 }
 
-func (d *DOMErrorHandler) HandleError(error IDOMError) bool {
+func (d *DOMErrorHandlerImpl) HandleError(error DOMError) bool {
 	panic("unimplemented") // TODO
 
 	return false

@@ -1,6 +1,6 @@
 package dom
 
-type ITypeInfo interface {
+type TypeInfo interface {
 	// accessors
 	GetTypeName() string
 	SetTypeName(typeName string)
@@ -17,28 +17,28 @@ const (
 	DERIVATION_LIST        = 0x00000008
 )
 
-type TypeInfo struct {
+type TypeInfoImpl struct {
 	typeName      string
 	typeNamespace string
 }
 
-func (t *TypeInfo) GetTypeName() string {
+func (t *TypeInfoImpl) GetTypeName() string {
 	return t.typeName
 }
 
-func (t *TypeInfo) SetTypeName(typeName string) {
+func (t *TypeInfoImpl) SetTypeName(typeName string) {
 	t.typeName = typeName
 }
 
-func (t *TypeInfo) GetTypeNamespace() string {
+func (t *TypeInfoImpl) GetTypeNamespace() string {
 	return t.typeNamespace
 }
 
-func (t *TypeInfo) SetTypeNamespace(typeNamespace string) {
+func (t *TypeInfoImpl) SetTypeNamespace(typeNamespace string) {
 	t.typeNamespace = typeNamespace
 }
 
-func (t *TypeInfo) IsDerivedFrom(typeNamespaceArg string, typeNameArg string, derivationMethod int32) bool {
+func (t *TypeInfoImpl) IsDerivedFrom(typeNamespaceArg string, typeNameArg string, derivationMethod int32) bool {
 	panic("unimplemented") // TODO
 
 	return false

@@ -1,7 +1,7 @@
 package dom
 
-type IEntity interface {
-	INode
+type Entity interface {
+	Node
 
 	// accessors
 	GetPublicId() string
@@ -19,8 +19,8 @@ type IEntity interface {
 	// no spec-defined functions
 }
 
-type Entity struct {
-	Node
+type EntityImpl struct {
+	NodeImpl
 	publicId      string
 	systemId      string
 	notationName  string
@@ -29,50 +29,50 @@ type Entity struct {
 	xmlVersion    string
 }
 
-func (e *Entity) GetPublicId() string {
+func (e *EntityImpl) GetPublicId() string {
 	return e.publicId
 }
 
-func (e *Entity) SetPublicId(publicId string) {
+func (e *EntityImpl) SetPublicId(publicId string) {
 	e.publicId = publicId
 }
 
-func (e *Entity) GetSystemId() string {
+func (e *EntityImpl) GetSystemId() string {
 	return e.systemId
 }
 
-func (e *Entity) SetSystemId(systemId string) {
+func (e *EntityImpl) SetSystemId(systemId string) {
 	e.systemId = systemId
 }
 
-func (e *Entity) GetNotationName() string {
+func (e *EntityImpl) GetNotationName() string {
 	return e.notationName
 }
 
-func (e *Entity) SetNotationName(notationName string) {
+func (e *EntityImpl) SetNotationName(notationName string) {
 	e.notationName = notationName
 }
 
-func (e *Entity) GetInputEncoding() string {
+func (e *EntityImpl) GetInputEncoding() string {
 	return e.inputEncoding
 }
 
-func (e *Entity) SetInputEncoding(inputEncoding string) {
+func (e *EntityImpl) SetInputEncoding(inputEncoding string) {
 	e.inputEncoding = inputEncoding
 }
 
-func (e *Entity) GetXmlEncoding() string {
+func (e *EntityImpl) GetXmlEncoding() string {
 	return e.xmlEncoding
 }
 
-func (e *Entity) SetXmlEncoding(xmlEncoding string) {
+func (e *EntityImpl) SetXmlEncoding(xmlEncoding string) {
 	e.xmlEncoding = xmlEncoding
 }
 
-func (e *Entity) GetXmlVersion() string {
+func (e *EntityImpl) GetXmlVersion() string {
 	return e.xmlVersion
 }
 
-func (e *Entity) SetXmlVersion(xmlVersion string) {
+func (e *EntityImpl) SetXmlVersion(xmlVersion string) {
 	e.xmlVersion = xmlVersion
 }

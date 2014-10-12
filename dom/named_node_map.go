@@ -1,68 +1,68 @@
 package dom
 
-type INamedNodeMap interface {
+type NamedNodeMap interface {
 	// accessors
 	GetLength() int32
 	SetLength(length int32)
 	// spec-defined functions
-	GetNamedItem(name string) INode
-	SetNamedItem(arg INode) INode
-	RemoveNamedItem(name string) INode
-	Item(index int32) INode
-	GetNamedItemNS(namespaceURI string, localName string) INode
-	SetNamedItemNS(arg INode) INode
-	RemoveNamedItemNS(namespaceURI string, localName string) INode
+	GetNamedItem(name string) Node
+	SetNamedItem(arg Node) Node
+	RemoveNamedItem(name string) Node
+	Item(index int32) Node
+	GetNamedItemNS(namespaceURI string, localName string) Node
+	SetNamedItemNS(arg Node) Node
+	RemoveNamedItemNS(namespaceURI string, localName string) Node
 }
 
-type NamedNodeMap struct {
+type NamedNodeMapImpl struct {
 	length int32
 }
 
-func (n *NamedNodeMap) GetLength() int32 {
+func (n *NamedNodeMapImpl) GetLength() int32 {
 	return n.length
 }
 
-func (n *NamedNodeMap) SetLength(length int32) {
+func (n *NamedNodeMapImpl) SetLength(length int32) {
 	n.length = length
 }
 
-func (n *NamedNodeMap) GetNamedItem(name string) INode {
+func (n *NamedNodeMapImpl) GetNamedItem(name string) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *NamedNodeMap) SetNamedItem(arg INode) INode {
+func (n *NamedNodeMapImpl) SetNamedItem(arg Node) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *NamedNodeMap) RemoveNamedItem(name string) INode {
+func (n *NamedNodeMapImpl) RemoveNamedItem(name string) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *NamedNodeMap) Item(index int32) INode {
+func (n *NamedNodeMapImpl) Item(index int32) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *NamedNodeMap) GetNamedItemNS(namespaceURI string, localName string) INode {
+func (n *NamedNodeMapImpl) GetNamedItemNS(namespaceURI string, localName string) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *NamedNodeMap) SetNamedItemNS(arg INode) INode {
+func (n *NamedNodeMapImpl) SetNamedItemNS(arg Node) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *NamedNodeMap) RemoveNamedItemNS(namespaceURI string, localName string) INode {
+func (n *NamedNodeMapImpl) RemoveNamedItemNS(namespaceURI string, localName string) Node {
 	panic("unimplemented") // TODO
 
 	return nil

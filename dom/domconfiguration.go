@@ -1,40 +1,40 @@
 package dom
 
-type IDOMConfiguration interface {
+type DOMConfiguration interface {
 	// accessors
-	GetParameterNames() IDOMStringList
-	SetParameterNames(parameterNames IDOMStringList)
+	GetParameterNames() DOMStringList
+	SetParameterNames(parameterNames DOMStringList)
 	// spec-defined functions
-	SetParameter(name string, value IDOMUserData)
-	GetParameter(name string) IDOMUserData
-	CanSetParameter(name string, value IDOMUserData) bool
+	SetParameter(name string, value DOMUserData)
+	GetParameter(name string) DOMUserData
+	CanSetParameter(name string, value DOMUserData) bool
 }
 
-type DOMConfiguration struct {
-	parameterNames IDOMStringList
+type DOMConfigurationImpl struct {
+	parameterNames DOMStringList
 }
 
-func (d *DOMConfiguration) GetParameterNames() IDOMStringList {
+func (d *DOMConfigurationImpl) GetParameterNames() DOMStringList {
 	return d.parameterNames
 }
 
-func (d *DOMConfiguration) SetParameterNames(parameterNames IDOMStringList) {
+func (d *DOMConfigurationImpl) SetParameterNames(parameterNames DOMStringList) {
 	d.parameterNames = parameterNames
 }
 
-func (d *DOMConfiguration) SetParameter(name string, value IDOMUserData) {
+func (d *DOMConfigurationImpl) SetParameter(name string, value DOMUserData) {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (d *DOMConfiguration) GetParameter(name string) IDOMUserData {
+func (d *DOMConfigurationImpl) GetParameter(name string) DOMUserData {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (d *DOMConfiguration) CanSetParameter(name string, value IDOMUserData) bool {
+func (d *DOMConfigurationImpl) CanSetParameter(name string, value DOMUserData) bool {
 	panic("unimplemented") // TODO
 
 	return false

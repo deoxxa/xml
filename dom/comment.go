@@ -1,12 +1,12 @@
 package dom
 
-type IComment interface {
-	ICharacterData
+type Comment interface {
+	CharacterData
 
 	// no accessors
 	// no spec-defined functions
 }
 
-type Comment struct {
-	CharacterData
+type CommentImpl struct {
+	CharacterDataImpl
 }

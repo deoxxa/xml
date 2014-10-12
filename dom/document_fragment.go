@@ -1,12 +1,12 @@
 package dom
 
-type IDocumentFragment interface {
-	INode
+type DocumentFragment interface {
+	Node
 
 	// no accessors
 	// no spec-defined functions
 }
 
-type DocumentFragment struct {
-	Node
+type DocumentFragmentImpl struct {
+	NodeImpl
 }

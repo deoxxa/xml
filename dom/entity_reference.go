@@ -1,12 +1,12 @@
 package dom
 
-type IEntityReference interface {
-	INode
+type EntityReference interface {
+	Node
 
 	// no accessors
 	// no spec-defined functions
 }
 
-type EntityReference struct {
-	Node
+type EntityReferenceImpl struct {
+	NodeImpl
 }

@@ -1,6 +1,6 @@
 package dom
 
-type INode interface {
+type Node interface {
 	// accessors
 	GetNodeName() string
 	SetNodeName(nodeName string)
@@ -8,22 +8,22 @@ type INode interface {
 	SetNodeValue(nodeValue string)
 	GetNodeType() int16
 	SetNodeType(nodeType int16)
-	GetParentNode() INode
-	SetParentNode(parentNode INode)
-	GetChildNodes() INodeList
-	SetChildNodes(childNodes INodeList)
-	GetFirstChild() INode
-	SetFirstChild(firstChild INode)
-	GetLastChild() INode
-	SetLastChild(lastChild INode)
-	GetPreviousSibling() INode
-	SetPreviousSibling(previousSibling INode)
-	GetNextSibling() INode
-	SetNextSibling(nextSibling INode)
-	GetAttributes() INamedNodeMap
-	SetAttributes(attributes INamedNodeMap)
-	GetOwnerDocument() IDocument
-	SetOwnerDocument(ownerDocument IDocument)
+	GetParentNode() Node
+	SetParentNode(parentNode Node)
+	GetChildNodes() NodeList
+	SetChildNodes(childNodes NodeList)
+	GetFirstChild() Node
+	SetFirstChild(firstChild Node)
+	GetLastChild() Node
+	SetLastChild(lastChild Node)
+	GetPreviousSibling() Node
+	SetPreviousSibling(previousSibling Node)
+	GetNextSibling() Node
+	SetNextSibling(nextSibling Node)
+	GetAttributes() NamedNodeMap
+	SetAttributes(attributes NamedNodeMap)
+	GetOwnerDocument() Document
+	SetOwnerDocument(ownerDocument Document)
 	GetNamespaceURI() string
 	SetNamespaceURI(namespaceURI string)
 	GetPrefix() string
@@ -35,24 +35,24 @@ type INode interface {
 	GetTextContent() string
 	SetTextContent(textContent string)
 	// spec-defined functions
-	InsertBefore(newChild INode, refChild INode) INode
-	ReplaceChild(newChild INode, oldChild INode) INode
-	RemoveChild(oldChild INode) INode
-	AppendChild(newChild INode) INode
+	InsertBefore(newChild Node, refChild Node) Node
+	ReplaceChild(newChild Node, oldChild Node) Node
+	RemoveChild(oldChild Node) Node
+	AppendChild(newChild Node) Node
 	HasChildNodes() bool
-	CloneNode(deep bool) INode
+	CloneNode(deep bool) Node
 	Normalize()
 	IsSupported(feature string, version string) bool
 	HasAttributes() bool
-	CompareDocumentPosition(other INode) int16
-	IsSameNode(other INode) bool
+	CompareDocumentPosition(other Node) int16
+	IsSameNode(other Node) bool
 	LookupPrefix(namespaceURI string) string
 	IsDefaultNamespace(namespaceURI string) bool
 	LookupNamespaceURI(prefix string) string
-	IsEqualNode(arg INode) bool
-	GetFeature(feature string, version string) IDOMObject
-	SetUserData(key string, data IDOMUserData, handler IUserDataHandler) IDOMUserData
-	GetUserData(key string) IDOMUserData
+	IsEqualNode(arg Node) bool
+	GetFeature(feature string, version string) DOMObject
+	SetUserData(key string, data DOMUserData, handler UserDataHandler) DOMUserData
+	GetUserData(key string) DOMUserData
 }
 
 const (
@@ -76,18 +76,18 @@ const (
 	DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20
 )
 
-type Node struct {
+type NodeImpl struct {
 	nodeName        string
 	nodeValue       string
 	nodeType        int16
-	parentNode      INode
-	childNodes      INodeList
-	firstChild      INode
-	lastChild       INode
-	previousSibling INode
-	nextSibling     INode
-	attributes      INamedNodeMap
-	ownerDocument   IDocument
+	parentNode      Node
+	childNodes      NodeList
+	firstChild      Node
+	lastChild       Node
+	previousSibling Node
+	nextSibling     Node
+	attributes      NamedNodeMap
+	ownerDocument   Document
 	namespaceURI    string
 	prefix          string
 	localName       string
@@ -95,140 +95,140 @@ type Node struct {
 	textContent     string
 }
 
-func (n *Node) GetNodeName() string {
+func (n *NodeImpl) GetNodeName() string {
 	return n.nodeName
 }
 
-func (n *Node) SetNodeName(nodeName string) {
+func (n *NodeImpl) SetNodeName(nodeName string) {
 	n.nodeName = nodeName
 }
 
-func (n *Node) GetNodeValue() string {
+func (n *NodeImpl) GetNodeValue() string {
 	return n.nodeValue
 }
 
-func (n *Node) SetNodeValue(nodeValue string) {
+func (n *NodeImpl) SetNodeValue(nodeValue string) {
 	n.nodeValue = nodeValue
 }
 
-func (n *Node) GetNodeType() int16 {
+func (n *NodeImpl) GetNodeType() int16 {
 	return n.nodeType
 }
 
-func (n *Node) SetNodeType(nodeType int16) {
+func (n *NodeImpl) SetNodeType(nodeType int16) {
 	n.nodeType = nodeType
 }
 
-func (n *Node) GetParentNode() INode {
+func (n *NodeImpl) GetParentNode() Node {
 	return n.parentNode
 }
 
-func (n *Node) SetParentNode(parentNode INode) {
+func (n *NodeImpl) SetParentNode(parentNode Node) {
 	n.parentNode = parentNode
 }
 
-func (n *Node) GetChildNodes() INodeList {
+func (n *NodeImpl) GetChildNodes() NodeList {
 	return n.childNodes
 }
 
-func (n *Node) SetChildNodes(childNodes INodeList) {
+func (n *NodeImpl) SetChildNodes(childNodes NodeList) {
 	n.childNodes = childNodes
 }
 
-func (n *Node) GetFirstChild() INode {
+func (n *NodeImpl) GetFirstChild() Node {
 	return n.firstChild
 }
 
-func (n *Node) SetFirstChild(firstChild INode) {
+func (n *NodeImpl) SetFirstChild(firstChild Node) {
 	n.firstChild = firstChild
 }
 
-func (n *Node) GetLastChild() INode {
+func (n *NodeImpl) GetLastChild() Node {
 	return n.lastChild
 }
 
-func (n *Node) SetLastChild(lastChild INode) {
+func (n *NodeImpl) SetLastChild(lastChild Node) {
 	n.lastChild = lastChild
 }
 
-func (n *Node) GetPreviousSibling() INode {
+func (n *NodeImpl) GetPreviousSibling() Node {
 	return n.previousSibling
 }
 
-func (n *Node) SetPreviousSibling(previousSibling INode) {
+func (n *NodeImpl) SetPreviousSibling(previousSibling Node) {
 	n.previousSibling = previousSibling
 }
 
-func (n *Node) GetNextSibling() INode {
+func (n *NodeImpl) GetNextSibling() Node {
 	return n.nextSibling
 }
 
-func (n *Node) SetNextSibling(nextSibling INode) {
+func (n *NodeImpl) SetNextSibling(nextSibling Node) {
 	n.nextSibling = nextSibling
 }
 
-func (n *Node) GetAttributes() INamedNodeMap {
+func (n *NodeImpl) GetAttributes() NamedNodeMap {
 	return n.attributes
 }
 
-func (n *Node) SetAttributes(attributes INamedNodeMap) {
+func (n *NodeImpl) SetAttributes(attributes NamedNodeMap) {
 	n.attributes = attributes
 }
 
-func (n *Node) GetOwnerDocument() IDocument {
+func (n *NodeImpl) GetOwnerDocument() Document {
 	return n.ownerDocument
 }
 
-func (n *Node) SetOwnerDocument(ownerDocument IDocument) {
+func (n *NodeImpl) SetOwnerDocument(ownerDocument Document) {
 	n.ownerDocument = ownerDocument
 }
 
-func (n *Node) GetNamespaceURI() string {
+func (n *NodeImpl) GetNamespaceURI() string {
 	return n.namespaceURI
 }
 
-func (n *Node) SetNamespaceURI(namespaceURI string) {
+func (n *NodeImpl) SetNamespaceURI(namespaceURI string) {
 	n.namespaceURI = namespaceURI
 }
 
-func (n *Node) GetPrefix() string {
+func (n *NodeImpl) GetPrefix() string {
 	return n.prefix
 }
 
-func (n *Node) SetPrefix(prefix string) {
+func (n *NodeImpl) SetPrefix(prefix string) {
 	n.prefix = prefix
 }
 
-func (n *Node) GetLocalName() string {
+func (n *NodeImpl) GetLocalName() string {
 	return n.localName
 }
 
-func (n *Node) SetLocalName(localName string) {
+func (n *NodeImpl) SetLocalName(localName string) {
 	n.localName = localName
 }
 
-func (n *Node) GetBaseURI() string {
+func (n *NodeImpl) GetBaseURI() string {
 	return n.baseURI
 }
 
-func (n *Node) SetBaseURI(baseURI string) {
+func (n *NodeImpl) SetBaseURI(baseURI string) {
 	n.baseURI = baseURI
 }
 
-func (n *Node) GetTextContent() string {
+func (n *NodeImpl) GetTextContent() string {
 	return n.textContent
 }
 
-func (n *Node) SetTextContent(textContent string) {
+func (n *NodeImpl) SetTextContent(textContent string) {
 	n.textContent = textContent
 }
 
-func (n *Node) InsertBefore(newChild INode, refChild INode) INode {
+func (n *NodeImpl) InsertBefore(newChild Node, refChild Node) Node {
 	if newChild.GetParentNode() != nil {
 		newChild.GetParentNode().RemoveChild(newChild)
 	}
 
-	var previousSibling INode
+	var previousSibling Node
 	if refChild != nil {
 		previousSibling = refChild.GetPreviousSibling()
 	} else {
@@ -252,12 +252,12 @@ func (n *Node) InsertBefore(newChild INode, refChild INode) INode {
 
 	newChild.SetParentNode(n)
 
-	n.childNodes = append(n.childNodes.(NodeList), newChild)
+	n.childNodes = append(n.childNodes.(NodeListImpl), newChild)
 
 	return newChild
 }
 
-func (n *Node) ReplaceChild(newChild INode, oldChild INode) INode {
+func (n *NodeImpl) ReplaceChild(newChild Node, oldChild Node) Node {
 	n.InsertBefore(newChild, oldChild)
 
 	if oldChild != nil {
@@ -267,7 +267,7 @@ func (n *Node) ReplaceChild(newChild INode, oldChild INode) INode {
 	return newChild
 }
 
-func (n *Node) RemoveChild(oldChild INode) INode {
+func (n *NodeImpl) RemoveChild(oldChild Node) Node {
 	previousSibling := oldChild.GetPreviousSibling()
 	nextSibling := oldChild.GetNextSibling()
 
@@ -286,89 +286,89 @@ func (n *Node) RemoveChild(oldChild INode) INode {
 	return oldChild
 }
 
-func (n *Node) AppendChild(newChild INode) INode {
+func (n *NodeImpl) AppendChild(newChild Node) Node {
 	return n.InsertBefore(newChild, nil)
 }
 
-func (n *Node) HasChildNodes() bool {
+func (n *NodeImpl) HasChildNodes() bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n *Node) CloneNode(deep bool) INode {
+func (n *NodeImpl) CloneNode(deep bool) Node {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *Node) Normalize() {
+func (n *NodeImpl) Normalize() {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (n *Node) IsSupported(feature string, version string) bool {
+func (n *NodeImpl) IsSupported(feature string, version string) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n *Node) HasAttributes() bool {
+func (n *NodeImpl) HasAttributes() bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n *Node) CompareDocumentPosition(other INode) int16 {
+func (n *NodeImpl) CompareDocumentPosition(other Node) int16 {
 	panic("unimplemented") // TODO
 
 	return 0
 }
 
-func (n *Node) IsSameNode(other INode) bool {
+func (n *NodeImpl) IsSameNode(other Node) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n *Node) LookupPrefix(namespaceURI string) string {
+func (n *NodeImpl) LookupPrefix(namespaceURI string) string {
 	panic("unimplemented") // TODO
 
 	return ""
 }
 
-func (n *Node) IsDefaultNamespace(namespaceURI string) bool {
+func (n *NodeImpl) IsDefaultNamespace(namespaceURI string) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n *Node) LookupNamespaceURI(prefix string) string {
+func (n *NodeImpl) LookupNamespaceURI(prefix string) string {
 	panic("unimplemented") // TODO
 
 	return ""
 }
 
-func (n *Node) IsEqualNode(arg INode) bool {
+func (n *NodeImpl) IsEqualNode(arg Node) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n *Node) GetFeature(feature string, version string) IDOMObject {
+func (n *NodeImpl) GetFeature(feature string, version string) DOMObject {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *Node) SetUserData(key string, data IDOMUserData, handler IUserDataHandler) IDOMUserData {
+func (n *NodeImpl) SetUserData(key string, data DOMUserData, handler UserDataHandler) DOMUserData {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n *Node) GetUserData(key string) IDOMUserData {
+func (n *NodeImpl) GetUserData(key string) DOMUserData {
 	panic("unimplemented") // TODO
 
 	return nil

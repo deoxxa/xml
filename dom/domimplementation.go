@@ -1,25 +1,25 @@
 package dom
 
-type IDOMImplementation interface {
+type DOMImplementation interface {
 	// no accessors
 	// spec-defined functions
 	HasFeature(feature string, version string) bool
-	CreateDocumentType(qualifiedName string, publicId string, systemId string) IDocumentType
-	CreateDocument(namespaceURI string, qualifiedName string, doctype IDocumentType) IDocument
-	GetFeature(feature string, version string) IDOMObject
+	CreateDocumentType(qualifiedName string, publicId string, systemId string) DocumentType
+	CreateDocument(namespaceURI string, qualifiedName string, doctype DocumentType) Document
+	GetFeature(feature string, version string) DOMObject
 }
 
-type DOMImplementation struct {
+type DOMImplementationImpl struct {
 	features map[string][]string
 }
 
-func NewDOMImplementation() *DOMImplementation {
-	return &DOMImplementation{
+func NewDOMImplementation() *DOMImplementationImpl {
+	return &DOMImplementationImpl{
 		features: map[string][]string{},
 	}
 }
 
-func (d *DOMImplementation) HasFeature(feature string, version string) bool {
+func (d *DOMImplementationImpl) HasFeature(feature string, version string) bool {
 	if _feature, ok := d.features[feature]; ok {
 		if version == "" {
 			return true
@@ -35,19 +35,19 @@ func (d *DOMImplementation) HasFeature(feature string, version string) bool {
 	return false
 }
 
-func (d *DOMImplementation) CreateDocumentType(qualifiedName string, publicId string, systemId string) IDocumentType {
-	return &DocumentType{
+func (d *DOMImplementationImpl) CreateDocumentType(qualifiedName string, publicId string, systemId string) DocumentType {
+	return &DocumentTypeImpl{
 		name:     qualifiedName,
 		publicId: publicId,
 		systemId: systemId,
 	}
 }
 
-func (d *DOMImplementation) CreateDocument(namespaceURI string, qualifiedName string, doctype IDocumentType) IDocument {
-	document := &Document{
-		Node: Node{
+func (d *DOMImplementationImpl) CreateDocument(namespaceURI string, qualifiedName string, doctype DocumentType) Document {
+	document := &DocumentImpl{
+		NodeImpl: NodeImpl{
 			nodeName:   "#document",
-			childNodes: NodeList{},
+			childNodes: NodeListImpl{},
 		},
 		implementation: d,
 		doctype:        doctype,
@@ -64,7 +64,7 @@ func (d *DOMImplementation) CreateDocument(namespaceURI string, qualifiedName st
 	return document
 }
 
-func (d *DOMImplementation) GetFeature(feature string, version string) IDOMObject {
+func (d *DOMImplementationImpl) GetFeature(feature string, version string) DOMObject {
 	panic("unimplemented") // TODO
 
 	return nil

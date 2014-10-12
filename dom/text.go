@@ -1,7 +1,7 @@
 package dom
 
-type IText interface {
-	ICharacterData
+type Text interface {
+	CharacterData
 
 	// accessors
 	GetIsElementContentWhitespace() bool
@@ -9,39 +9,39 @@ type IText interface {
 	GetWholeText() string
 	SetWholeText(wholeText string)
 	// spec-defined functions
-	SplitText(offset int32) IText
-	ReplaceWholeText(content string) IText
+	SplitText(offset int32) Text
+	ReplaceWholeText(content string) Text
 }
 
-type Text struct {
-	CharacterData
+type TextImpl struct {
+	CharacterDataImpl
 	isElementContentWhitespace bool
 	wholeText                  string
 }
 
-func (t *Text) GetIsElementContentWhitespace() bool {
+func (t *TextImpl) GetIsElementContentWhitespace() bool {
 	return t.isElementContentWhitespace
 }
 
-func (t *Text) SetIsElementContentWhitespace(isElementContentWhitespace bool) {
+func (t *TextImpl) SetIsElementContentWhitespace(isElementContentWhitespace bool) {
 	t.isElementContentWhitespace = isElementContentWhitespace
 }
 
-func (t *Text) GetWholeText() string {
+func (t *TextImpl) GetWholeText() string {
 	return t.wholeText
 }
 
-func (t *Text) SetWholeText(wholeText string) {
+func (t *TextImpl) SetWholeText(wholeText string) {
 	t.wholeText = wholeText
 }
 
-func (t *Text) SplitText(offset int32) IText {
+func (t *TextImpl) SplitText(offset int32) Text {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (t *Text) ReplaceWholeText(content string) IText {
+func (t *TextImpl) ReplaceWholeText(content string) Text {
 	panic("unimplemented") // TODO
 
 	return nil

@@ -1,15 +1,15 @@
 package dom
 
-type IDocumentType interface {
-	INode
+type DocumentType interface {
+	Node
 
 	// accessors
 	GetName() string
 	SetName(name string)
-	GetEntities() INamedNodeMap
-	SetEntities(entities INamedNodeMap)
-	GetNotations() INamedNodeMap
-	SetNotations(notations INamedNodeMap)
+	GetEntities() NamedNodeMap
+	SetEntities(entities NamedNodeMap)
+	GetNotations() NamedNodeMap
+	SetNotations(notations NamedNodeMap)
 	GetPublicId() string
 	SetPublicId(publicId string)
 	GetSystemId() string
@@ -19,60 +19,60 @@ type IDocumentType interface {
 	// no spec-defined functions
 }
 
-type DocumentType struct {
-	Node
+type DocumentTypeImpl struct {
+	NodeImpl
 	name           string
-	entities       INamedNodeMap
-	notations      INamedNodeMap
+	entities       NamedNodeMap
+	notations      NamedNodeMap
 	publicId       string
 	systemId       string
 	internalSubset string
 }
 
-func (d *DocumentType) GetName() string {
+func (d *DocumentTypeImpl) GetName() string {
 	return d.name
 }
 
-func (d *DocumentType) SetName(name string) {
+func (d *DocumentTypeImpl) SetName(name string) {
 	d.name = name
 }
 
-func (d *DocumentType) GetEntities() INamedNodeMap {
+func (d *DocumentTypeImpl) GetEntities() NamedNodeMap {
 	return d.entities
 }
 
-func (d *DocumentType) SetEntities(entities INamedNodeMap) {
+func (d *DocumentTypeImpl) SetEntities(entities NamedNodeMap) {
 	d.entities = entities
 }
 
-func (d *DocumentType) GetNotations() INamedNodeMap {
+func (d *DocumentTypeImpl) GetNotations() NamedNodeMap {
 	return d.notations
 }
 
-func (d *DocumentType) SetNotations(notations INamedNodeMap) {
+func (d *DocumentTypeImpl) SetNotations(notations NamedNodeMap) {
 	d.notations = notations
 }
 
-func (d *DocumentType) GetPublicId() string {
+func (d *DocumentTypeImpl) GetPublicId() string {
 	return d.publicId
 }
 
-func (d *DocumentType) SetPublicId(publicId string) {
+func (d *DocumentTypeImpl) SetPublicId(publicId string) {
 	d.publicId = publicId
 }
 
-func (d *DocumentType) GetSystemId() string {
+func (d *DocumentTypeImpl) GetSystemId() string {
 	return d.systemId
 }
 
-func (d *DocumentType) SetSystemId(systemId string) {
+func (d *DocumentTypeImpl) SetSystemId(systemId string) {
 	d.systemId = systemId
 }
 
-func (d *DocumentType) GetInternalSubset() string {
+func (d *DocumentTypeImpl) GetInternalSubset() string {
 	return d.internalSubset
 }
 
-func (d *DocumentType) SetInternalSubset(internalSubset string) {
+func (d *DocumentTypeImpl) SetInternalSubset(internalSubset string) {
 	d.internalSubset = internalSubset
 }

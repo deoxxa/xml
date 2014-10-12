@@ -1,7 +1,7 @@
 package dom
 
-type IProcessingInstruction interface {
-	INode
+type ProcessingInstruction interface {
+	Node
 
 	// accessors
 	GetTarget() string
@@ -11,24 +11,24 @@ type IProcessingInstruction interface {
 	// no spec-defined functions
 }
 
-type ProcessingInstruction struct {
-	Node
+type ProcessingInstructionImpl struct {
+	NodeImpl
 	target string
 	data   string
 }
 
-func (p *ProcessingInstruction) GetTarget() string {
+func (p *ProcessingInstructionImpl) GetTarget() string {
 	return p.target
 }
 
-func (p *ProcessingInstruction) SetTarget(target string) {
+func (p *ProcessingInstructionImpl) SetTarget(target string) {
 	p.target = target
 }
 
-func (p *ProcessingInstruction) GetData() string {
+func (p *ProcessingInstructionImpl) GetData() string {
 	return p.data
 }
 
-func (p *ProcessingInstruction) SetData(data string) {
+func (p *ProcessingInstructionImpl) SetData(data string) {
 	p.data = data
 }

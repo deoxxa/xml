@@ -1,12 +1,12 @@
 package dom
 
-type ICDATASection interface {
-	IText
+type CDATASection interface {
+	Text
 
 	// no accessors
 	// no spec-defined functions
 }
 
-type CDATASection struct {
-	Text
+type CDATASectionImpl struct {
+	TextImpl
 }

@@ -1,159 +1,159 @@
 package dom
 
-type IElement interface {
-	INode
+type Element interface {
+	Node
 
 	// accessors
 	GetTagName() string
 	SetTagName(tagName string)
-	GetSchemaTypeInfo() ITypeInfo
-	SetSchemaTypeInfo(schemaTypeInfo ITypeInfo)
+	GetSchemaTypeInfo() TypeInfo
+	SetSchemaTypeInfo(schemaTypeInfo TypeInfo)
 	// spec-defined functions
 	GetAttribute(name string) string
 	SetAttribute(name string, value string)
 	RemoveAttribute(name string)
-	GetAttributeNode(name string) IAttr
-	SetAttributeNode(newAttr IAttr) IAttr
-	RemoveAttributeNode(oldAttr IAttr) IAttr
-	GetElementsByTagName(name string) INodeList
+	GetAttributeNode(name string) Attr
+	SetAttributeNode(newAttr Attr) Attr
+	RemoveAttributeNode(oldAttr Attr) Attr
+	GetElementsByTagName(name string) NodeList
 	GetAttributeNS(namespaceURI string, localName string) string
 	SetAttributeNS(namespaceURI string, qualifiedName string, value string)
 	RemoveAttributeNS(namespaceURI string, localName string)
-	GetAttributeNodeNS(namespaceURI string, localName string) IAttr
-	SetAttributeNodeNS(newAttr IAttr) IAttr
-	GetElementsByTagNameNS(namespaceURI string, localName string) INodeList
+	GetAttributeNodeNS(namespaceURI string, localName string) Attr
+	SetAttributeNodeNS(newAttr Attr) Attr
+	GetElementsByTagNameNS(namespaceURI string, localName string) NodeList
 	HasAttribute(name string) bool
 	HasAttributeNS(namespaceURI string, localName string) bool
 	SetIdAttribute(name string, isId bool)
 	SetIdAttributeNS(namespaceURI string, localName string, isId bool)
-	SetIdAttributeNode(idAttr IAttr, isId bool)
+	SetIdAttributeNode(idAttr Attr, isId bool)
 }
 
-type Element struct {
-	Node
+type ElementImpl struct {
+	NodeImpl
 	tagName        string
-	schemaTypeInfo ITypeInfo
+	schemaTypeInfo TypeInfo
 }
 
-func (e *Element) GetTagName() string {
+func (e *ElementImpl) GetTagName() string {
 	return e.tagName
 }
 
-func (e *Element) SetTagName(tagName string) {
+func (e *ElementImpl) SetTagName(tagName string) {
 	e.tagName = tagName
 }
 
-func (e *Element) GetSchemaTypeInfo() ITypeInfo {
+func (e *ElementImpl) GetSchemaTypeInfo() TypeInfo {
 	return e.schemaTypeInfo
 }
 
-func (e *Element) SetSchemaTypeInfo(schemaTypeInfo ITypeInfo) {
+func (e *ElementImpl) SetSchemaTypeInfo(schemaTypeInfo TypeInfo) {
 	e.schemaTypeInfo = schemaTypeInfo
 }
 
-func (e *Element) GetAttribute(name string) string {
+func (e *ElementImpl) GetAttribute(name string) string {
 	panic("unimplemented") // TODO
 
 	return ""
 }
 
-func (e *Element) SetAttribute(name string, value string) {
+func (e *ElementImpl) SetAttribute(name string, value string) {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (e *Element) RemoveAttribute(name string) {
+func (e *ElementImpl) RemoveAttribute(name string) {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (e *Element) GetAttributeNode(name string) IAttr {
+func (e *ElementImpl) GetAttributeNode(name string) Attr {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (e *Element) SetAttributeNode(newAttr IAttr) IAttr {
+func (e *ElementImpl) SetAttributeNode(newAttr Attr) Attr {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (e *Element) RemoveAttributeNode(oldAttr IAttr) IAttr {
+func (e *ElementImpl) RemoveAttributeNode(oldAttr Attr) Attr {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (e *Element) GetElementsByTagName(name string) INodeList {
+func (e *ElementImpl) GetElementsByTagName(name string) NodeList {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (e *Element) GetAttributeNS(namespaceURI string, localName string) string {
+func (e *ElementImpl) GetAttributeNS(namespaceURI string, localName string) string {
 	panic("unimplemented") // TODO
 
 	return ""
 }
 
-func (e *Element) SetAttributeNS(namespaceURI string, qualifiedName string, value string) {
+func (e *ElementImpl) SetAttributeNS(namespaceURI string, qualifiedName string, value string) {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (e *Element) RemoveAttributeNS(namespaceURI string, localName string) {
+func (e *ElementImpl) RemoveAttributeNS(namespaceURI string, localName string) {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (e *Element) GetAttributeNodeNS(namespaceURI string, localName string) IAttr {
+func (e *ElementImpl) GetAttributeNodeNS(namespaceURI string, localName string) Attr {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (e *Element) SetAttributeNodeNS(newAttr IAttr) IAttr {
+func (e *ElementImpl) SetAttributeNodeNS(newAttr Attr) Attr {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (e *Element) GetElementsByTagNameNS(namespaceURI string, localName string) INodeList {
+func (e *ElementImpl) GetElementsByTagNameNS(namespaceURI string, localName string) NodeList {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (e *Element) HasAttribute(name string) bool {
+func (e *ElementImpl) HasAttribute(name string) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (e *Element) HasAttributeNS(namespaceURI string, localName string) bool {
+func (e *ElementImpl) HasAttributeNS(namespaceURI string, localName string) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (e *Element) SetIdAttribute(name string, isId bool) {
+func (e *ElementImpl) SetIdAttribute(name string, isId bool) {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (e *Element) SetIdAttributeNS(namespaceURI string, localName string, isId bool) {
+func (e *ElementImpl) SetIdAttributeNS(namespaceURI string, localName string, isId bool) {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (e *Element) SetIdAttributeNode(idAttr IAttr, isId bool) {
+func (e *ElementImpl) SetIdAttributeNode(idAttr Attr, isId bool) {
 	panic("unimplemented") // TODO
 
 	return
