@@ -1,0 +1,132 @@
+package main
+
+type Parser Peg {
+  idl *IDL
+  currentWord string
+  currentNumber string
+  currentIntDef *InterfaceDef
+  currentAttDef *AttributeDef
+  currentConDef *ConstantDef
+  currentFunDef *FunctionDef
+  currentArgDef *ArgumentDef
+  currentTypDef *TypeDef
+  currentArgList []ArgumentDef
+}
+
+Start <-
+  Spacing
+  (InterfaceDef Spacing)*
+
+InterfaceDef <-
+  'interface' MustSpacing
+    { p.currentIntDef = new(InterfaceDef) }
+  Token Spacing
+    { p.currentIntDef.Name = p.currentWord }
+  ( ':' Spacing Token Spacing
+    { p.currentIntDef.Inherits = p.currentWord }
+  )?
+  InterfaceBody Spacing
+  ';'
+    { p.idl.Interfaces = append(p.idl.Interfaces, *p.currentIntDef); p.currentIntDef = nil }
+
+InterfaceBody <-
+  '{'
+  Spacing
+  (
+    (
+      ConstantDef
+        { p.currentIntDef.Constants = append(p.currentIntDef.Constants, *p.currentConDef); p.currentConDef = nil }
+      /
+      AttributeDef
+        { p.currentIntDef.Attributes = append(p.currentIntDef.Attributes, *p.currentAttDef); p.currentAttDef = nil }
+      /
+      FunctionDef
+        { p.currentIntDef.Functions = append(p.currentIntDef.Functions, *p.currentFunDef); p.currentFunDef = nil }
+    )
+
+    Spacing
+  )*
+  '}'
+
+ConstantDef <-
+  'const' MustSpacing
+    { p.currentConDef = new(ConstantDef) }
+  TypeDef MustSpacing
+    { p.currentConDef.Type = *p.currentTypDef; p.currentTypDef = nil }
+  Token Spacing
+    { p.currentConDef.Name = p.currentWord }
+  '=' Spacing Number
+    { p.currentConDef.Value = p.currentNumber }
+  ';'
+
+AttributeDef <-
+  ('readonly' MustSpacing)?
+  'attribute' MustSpacing
+    { p.currentAttDef = new(AttributeDef) }
+  TypeDef MustSpacing
+    { p.currentAttDef.Type = *p.currentTypDef; p.currentTypDef = nil }
+  Token Spacing
+    { p.currentAttDef.Name = p.currentWord }
+  ';'
+
+FunctionDef <-
+    { p.currentFunDef = new(FunctionDef); }
+  TypeDef MustSpacing
+    { p.currentFunDef.Type = *p.currentTypDef; p.currentTypDef = nil }
+  Token Spacing
+    { p.currentFunDef.Name = p.currentWord }
+  FunctionArgs Spacing
+    { p.currentFunDef.Arguments = p.currentArgList; p.currentArgList = nil }
+  ('raises' Spacing '(' Spacing Token Spacing ')' Spacing)?
+  ';'
+
+FunctionArgs <-
+  '(' Spacing
+  (
+    FunctionArg Spacing
+      { p.currentArgList = append(p.currentArgList, *p.currentArgDef); p.currentArgDef = nil }
+    (
+      ',' Spacing FunctionArg Spacing
+        { p.currentArgList = append(p.currentArgList, *p.currentArgDef); p.currentArgDef = nil }
+    )*
+  )?
+  ')'
+
+FunctionArg <-
+    { p.currentArgDef = new(ArgumentDef) }
+  ('in' MustSpacing)?
+  TypeDef MustSpacing
+    { p.currentArgDef.Type = *p.currentTypDef; p.currentTypDef = nil }
+  Token
+    { p.currentArgDef.Name = p.currentWord }
+
+TypeDef <-
+  { p.currentTypDef = new(TypeDef) }
+  (
+    'unsigned' MustSpacing
+      { p.currentTypDef.Unsigned = true }
+  )?
+  Token
+    { p.currentTypDef.Type = p.currentWord }
+
+Token <-
+  <[a-zA-Z0-9_]+>
+    { p.currentWord = string(buffer[begin:end]) }
+
+Number <-
+  (
+    '0x' <[0-9]+>
+      { p.currentNumber = "0x" + string(buffer[begin:end]) }
+  )
+  /
+  (
+    <[0-9]+>
+      { p.currentNumber = string(buffer[begin:end]) }
+  )
+
+EndOfLine    <- '\r\n' / '\n'
+Space        <- ' ' / '\t' / EndOfLine
+Comment      <- '//' (!EndOfLine .)* EndOfLine
+SpaceComment <- (Space / Comment)
+Spacing      <- SpaceComment*
+MustSpacing  <- SpaceComment+
