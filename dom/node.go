@@ -291,9 +291,7 @@ func (n *NodeImpl) AppendChild(newChild Node) Node {
 }
 
 func (n *NodeImpl) HasChildNodes() bool {
-	panic("unimplemented") // TODO
-
-	return false
+	return n.childNodes.GetLength() > 0
 }
 
 func (n *NodeImpl) CloneNode(deep bool) Node {
@@ -315,9 +313,7 @@ func (n *NodeImpl) IsSupported(feature string, version string) bool {
 }
 
 func (n *NodeImpl) HasAttributes() bool {
-	panic("unimplemented") // TODO
-
-	return false
+	return n.attributes.GetLength() > 0
 }
 
 func (n *NodeImpl) CompareDocumentPosition(other Node) int16 {
