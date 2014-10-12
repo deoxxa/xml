@@ -17,7 +17,7 @@ const (
 type UserDataHandler struct {
 }
 
-func (u UserDataHandler) Handle(operation int16, key string, data IDOMUserData, src INode, dst INode) {
+func (u *UserDataHandler) Handle(operation int16, key string, data IDOMUserData, src INode, dst INode) {
 	panic("unimplemented") // TODO
 
 	return

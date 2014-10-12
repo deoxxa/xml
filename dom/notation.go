@@ -17,18 +17,18 @@ type Notation struct {
 	systemId string
 }
 
-func (n Notation) GetPublicId() string {
+func (n *Notation) GetPublicId() string {
 	return n.publicId
 }
 
-func (n Notation) SetPublicId(publicId string) {
+func (n *Notation) SetPublicId(publicId string) {
 	n.publicId = publicId
 }
 
-func (n Notation) GetSystemId() string {
+func (n *Notation) GetSystemId() string {
 	return n.systemId
 }
 
-func (n Notation) SetSystemId(systemId string) {
+func (n *Notation) SetSystemId(systemId string) {
 	n.systemId = systemId
 }

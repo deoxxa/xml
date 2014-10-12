@@ -9,7 +9,7 @@ type IDOMErrorHandler interface {
 type DOMErrorHandler struct {
 }
 
-func (d DOMErrorHandler) HandleError(error IDOMError) bool {
+func (d *DOMErrorHandler) HandleError(error IDOMError) bool {
 	panic("unimplemented") // TODO
 
 	return false

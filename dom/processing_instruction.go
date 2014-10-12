@@ -17,18 +17,18 @@ type ProcessingInstruction struct {
 	data   string
 }
 
-func (p ProcessingInstruction) GetTarget() string {
+func (p *ProcessingInstruction) GetTarget() string {
 	return p.target
 }
 
-func (p ProcessingInstruction) SetTarget(target string) {
+func (p *ProcessingInstruction) SetTarget(target string) {
 	p.target = target
 }
 
-func (p ProcessingInstruction) GetData() string {
+func (p *ProcessingInstruction) GetData() string {
 	return p.data
 }
 
-func (p ProcessingInstruction) SetData(data string) {
+func (p *ProcessingInstruction) SetData(data string) {
 	p.data = data
 }

@@ -95,237 +95,280 @@ type Node struct {
 	textContent     string
 }
 
-func (n Node) GetNodeName() string {
+func (n *Node) GetNodeName() string {
 	return n.nodeName
 }
 
-func (n Node) SetNodeName(nodeName string) {
+func (n *Node) SetNodeName(nodeName string) {
 	n.nodeName = nodeName
 }
 
-func (n Node) GetNodeValue() string {
+func (n *Node) GetNodeValue() string {
 	return n.nodeValue
 }
 
-func (n Node) SetNodeValue(nodeValue string) {
+func (n *Node) SetNodeValue(nodeValue string) {
 	n.nodeValue = nodeValue
 }
 
-func (n Node) GetNodeType() int16 {
+func (n *Node) GetNodeType() int16 {
 	return n.nodeType
 }
 
-func (n Node) SetNodeType(nodeType int16) {
+func (n *Node) SetNodeType(nodeType int16) {
 	n.nodeType = nodeType
 }
 
-func (n Node) GetParentNode() INode {
+func (n *Node) GetParentNode() INode {
 	return n.parentNode
 }
 
-func (n Node) SetParentNode(parentNode INode) {
+func (n *Node) SetParentNode(parentNode INode) {
 	n.parentNode = parentNode
 }
 
-func (n Node) GetChildNodes() INodeList {
+func (n *Node) GetChildNodes() INodeList {
 	return n.childNodes
 }
 
-func (n Node) SetChildNodes(childNodes INodeList) {
+func (n *Node) SetChildNodes(childNodes INodeList) {
 	n.childNodes = childNodes
 }
 
-func (n Node) GetFirstChild() INode {
+func (n *Node) GetFirstChild() INode {
 	return n.firstChild
 }
 
-func (n Node) SetFirstChild(firstChild INode) {
+func (n *Node) SetFirstChild(firstChild INode) {
 	n.firstChild = firstChild
 }
 
-func (n Node) GetLastChild() INode {
+func (n *Node) GetLastChild() INode {
 	return n.lastChild
 }
 
-func (n Node) SetLastChild(lastChild INode) {
+func (n *Node) SetLastChild(lastChild INode) {
 	n.lastChild = lastChild
 }
 
-func (n Node) GetPreviousSibling() INode {
+func (n *Node) GetPreviousSibling() INode {
 	return n.previousSibling
 }
 
-func (n Node) SetPreviousSibling(previousSibling INode) {
+func (n *Node) SetPreviousSibling(previousSibling INode) {
 	n.previousSibling = previousSibling
 }
 
-func (n Node) GetNextSibling() INode {
+func (n *Node) GetNextSibling() INode {
 	return n.nextSibling
 }
 
-func (n Node) SetNextSibling(nextSibling INode) {
+func (n *Node) SetNextSibling(nextSibling INode) {
 	n.nextSibling = nextSibling
 }
 
-func (n Node) GetAttributes() INamedNodeMap {
+func (n *Node) GetAttributes() INamedNodeMap {
 	return n.attributes
 }
 
-func (n Node) SetAttributes(attributes INamedNodeMap) {
+func (n *Node) SetAttributes(attributes INamedNodeMap) {
 	n.attributes = attributes
 }
 
-func (n Node) GetOwnerDocument() IDocument {
+func (n *Node) GetOwnerDocument() IDocument {
 	return n.ownerDocument
 }
 
-func (n Node) SetOwnerDocument(ownerDocument IDocument) {
+func (n *Node) SetOwnerDocument(ownerDocument IDocument) {
 	n.ownerDocument = ownerDocument
 }
 
-func (n Node) GetNamespaceURI() string {
+func (n *Node) GetNamespaceURI() string {
 	return n.namespaceURI
 }
 
-func (n Node) SetNamespaceURI(namespaceURI string) {
+func (n *Node) SetNamespaceURI(namespaceURI string) {
 	n.namespaceURI = namespaceURI
 }
 
-func (n Node) GetPrefix() string {
+func (n *Node) GetPrefix() string {
 	return n.prefix
 }
 
-func (n Node) SetPrefix(prefix string) {
+func (n *Node) SetPrefix(prefix string) {
 	n.prefix = prefix
 }
 
-func (n Node) GetLocalName() string {
+func (n *Node) GetLocalName() string {
 	return n.localName
 }
 
-func (n Node) SetLocalName(localName string) {
+func (n *Node) SetLocalName(localName string) {
 	n.localName = localName
 }
 
-func (n Node) GetBaseURI() string {
+func (n *Node) GetBaseURI() string {
 	return n.baseURI
 }
 
-func (n Node) SetBaseURI(baseURI string) {
+func (n *Node) SetBaseURI(baseURI string) {
 	n.baseURI = baseURI
 }
 
-func (n Node) GetTextContent() string {
+func (n *Node) GetTextContent() string {
 	return n.textContent
 }
 
-func (n Node) SetTextContent(textContent string) {
+func (n *Node) SetTextContent(textContent string) {
 	n.textContent = textContent
 }
 
-func (n Node) InsertBefore(newChild INode, refChild INode) INode {
-	panic("unimplemented") // TODO
+func (n *Node) InsertBefore(newChild INode, refChild INode) INode {
+	if newChild.GetParentNode() != nil {
+		newChild.GetParentNode().RemoveChild(newChild)
+	}
 
-	return nil
+	var previousSibling INode
+	if refChild != nil {
+		previousSibling = refChild.GetPreviousSibling()
+	} else {
+		previousSibling = n.GetLastChild()
+	}
+
+	newChild.SetPreviousSibling(previousSibling)
+	newChild.SetNextSibling(refChild)
+
+	if previousSibling != nil {
+		previousSibling.SetNextSibling(newChild)
+	} else {
+		n.firstChild = newChild
+	}
+
+	if refChild != nil {
+		refChild.SetPreviousSibling(newChild)
+	} else {
+		n.lastChild = newChild
+	}
+
+	newChild.SetParentNode(n)
+
+	n.childNodes = append(n.childNodes.(NodeList), newChild)
+
+	return newChild
 }
 
-func (n Node) ReplaceChild(newChild INode, oldChild INode) INode {
-	panic("unimplemented") // TODO
+func (n *Node) ReplaceChild(newChild INode, oldChild INode) INode {
+	n.InsertBefore(newChild, oldChild)
 
-	return nil
+	if oldChild != nil {
+		n.RemoveChild(oldChild)
+	}
+
+	return newChild
 }
 
-func (n Node) RemoveChild(oldChild INode) INode {
-	panic("unimplemented") // TODO
+func (n *Node) RemoveChild(oldChild INode) INode {
+	previousSibling := oldChild.GetPreviousSibling()
+	nextSibling := oldChild.GetNextSibling()
 
-	return nil
+	if previousSibling != nil {
+		previousSibling.SetNextSibling(nextSibling)
+	} else {
+		n.firstChild = nextSibling
+	}
+
+	if nextSibling != nil {
+		nextSibling.SetPreviousSibling(previousSibling)
+	} else {
+		n.lastChild = previousSibling
+	}
+
+	return oldChild
 }
 
-func (n Node) AppendChild(newChild INode) INode {
-	panic("unimplemented") // TODO
-
-	return nil
+func (n *Node) AppendChild(newChild INode) INode {
+	return n.InsertBefore(newChild, nil)
 }
 
-func (n Node) HasChildNodes() bool {
+func (n *Node) HasChildNodes() bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n Node) CloneNode(deep bool) INode {
+func (n *Node) CloneNode(deep bool) INode {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n Node) Normalize() {
+func (n *Node) Normalize() {
 	panic("unimplemented") // TODO
 
 	return
 }
 
-func (n Node) IsSupported(feature string, version string) bool {
+func (n *Node) IsSupported(feature string, version string) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n Node) HasAttributes() bool {
+func (n *Node) HasAttributes() bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n Node) CompareDocumentPosition(other INode) int16 {
+func (n *Node) CompareDocumentPosition(other INode) int16 {
 	panic("unimplemented") // TODO
 
 	return 0
 }
 
-func (n Node) IsSameNode(other INode) bool {
+func (n *Node) IsSameNode(other INode) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n Node) LookupPrefix(namespaceURI string) string {
+func (n *Node) LookupPrefix(namespaceURI string) string {
 	panic("unimplemented") // TODO
 
 	return ""
 }
 
-func (n Node) IsDefaultNamespace(namespaceURI string) bool {
+func (n *Node) IsDefaultNamespace(namespaceURI string) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n Node) LookupNamespaceURI(prefix string) string {
+func (n *Node) LookupNamespaceURI(prefix string) string {
 	panic("unimplemented") // TODO
 
 	return ""
 }
 
-func (n Node) IsEqualNode(arg INode) bool {
+func (n *Node) IsEqualNode(arg INode) bool {
 	panic("unimplemented") // TODO
 
 	return false
 }
 
-func (n Node) GetFeature(feature string, version string) IDOMObject {
+func (n *Node) GetFeature(feature string, version string) IDOMObject {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n Node) SetUserData(key string, data IDOMUserData, handler IUserDataHandler) IDOMUserData {
+func (n *Node) SetUserData(key string, data IDOMUserData, handler IUserDataHandler) IDOMUserData {
 	panic("unimplemented") // TODO
 
 	return nil
 }
 
-func (n Node) GetUserData(key string) IDOMUserData {
+func (n *Node) GetUserData(key string) IDOMUserData {
 	panic("unimplemented") // TODO
 
 	return nil

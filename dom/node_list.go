@@ -3,25 +3,16 @@ package dom
 type INodeList interface {
 	// accessors
 	GetLength() int32
-	SetLength(length int32)
 	// spec-defined functions
 	Item(index int32) INode
 }
 
-type NodeList struct {
-	length int32
-}
+type NodeList []INode
 
 func (n NodeList) GetLength() int32 {
-	return n.length
-}
-
-func (n NodeList) SetLength(length int32) {
-	n.length = length
+	return int32(len(n))
 }
 
 func (n NodeList) Item(index int32) INode {
-	panic("unimplemented") // TODO
-
-	return nil
+	return n[int(index)]
 }

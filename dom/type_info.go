@@ -22,23 +22,23 @@ type TypeInfo struct {
 	typeNamespace string
 }
 
-func (t TypeInfo) GetTypeName() string {
+func (t *TypeInfo) GetTypeName() string {
 	return t.typeName
 }
 
-func (t TypeInfo) SetTypeName(typeName string) {
+func (t *TypeInfo) SetTypeName(typeName string) {
 	t.typeName = typeName
 }
 
-func (t TypeInfo) GetTypeNamespace() string {
+func (t *TypeInfo) GetTypeNamespace() string {
 	return t.typeNamespace
 }
 
-func (t TypeInfo) SetTypeNamespace(typeNamespace string) {
+func (t *TypeInfo) SetTypeNamespace(typeNamespace string) {
 	t.typeNamespace = typeNamespace
 }
 
-func (t TypeInfo) IsDerivedFrom(typeNamespaceArg string, typeNameArg string, derivationMethod int32) bool {
+func (t *TypeInfo) IsDerivedFrom(typeNamespaceArg string, typeNameArg string, derivationMethod int32) bool {
 	panic("unimplemented") // TODO
 
 	return false

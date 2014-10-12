@@ -29,50 +29,50 @@ type Entity struct {
 	xmlVersion    string
 }
 
-func (e Entity) GetPublicId() string {
+func (e *Entity) GetPublicId() string {
 	return e.publicId
 }
 
-func (e Entity) SetPublicId(publicId string) {
+func (e *Entity) SetPublicId(publicId string) {
 	e.publicId = publicId
 }
 
-func (e Entity) GetSystemId() string {
+func (e *Entity) GetSystemId() string {
 	return e.systemId
 }
 
-func (e Entity) SetSystemId(systemId string) {
+func (e *Entity) SetSystemId(systemId string) {
 	e.systemId = systemId
 }
 
-func (e Entity) GetNotationName() string {
+func (e *Entity) GetNotationName() string {
 	return e.notationName
 }
 
-func (e Entity) SetNotationName(notationName string) {
+func (e *Entity) SetNotationName(notationName string) {
 	e.notationName = notationName
 }
 
-func (e Entity) GetInputEncoding() string {
+func (e *Entity) GetInputEncoding() string {
 	return e.inputEncoding
 }
 
-func (e Entity) SetInputEncoding(inputEncoding string) {
+func (e *Entity) SetInputEncoding(inputEncoding string) {
 	e.inputEncoding = inputEncoding
 }
 
-func (e Entity) GetXmlEncoding() string {
+func (e *Entity) GetXmlEncoding() string {
 	return e.xmlEncoding
 }
 
-func (e Entity) SetXmlEncoding(xmlEncoding string) {
+func (e *Entity) SetXmlEncoding(xmlEncoding string) {
 	e.xmlEncoding = xmlEncoding
 }
 
-func (e Entity) GetXmlVersion() string {
+func (e *Entity) GetXmlVersion() string {
 	return e.xmlVersion
 }
 
-func (e Entity) SetXmlVersion(xmlVersion string) {
+func (e *Entity) SetXmlVersion(xmlVersion string) {
 	e.xmlVersion = xmlVersion
 }

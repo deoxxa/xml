@@ -32,50 +32,50 @@ type DOMError struct {
 	location         IDOMLocator
 }
 
-func (d DOMError) GetSeverity() int16 {
+func (d *DOMError) GetSeverity() int16 {
 	return d.severity
 }
 
-func (d DOMError) SetSeverity(severity int16) {
+func (d *DOMError) SetSeverity(severity int16) {
 	d.severity = severity
 }
 
-func (d DOMError) GetMessage() string {
+func (d *DOMError) GetMessage() string {
 	return d.message
 }
 
-func (d DOMError) SetMessage(message string) {
+func (d *DOMError) SetMessage(message string) {
 	d.message = message
 }
 
-func (d DOMError) GetType() string {
+func (d *DOMError) GetType() string {
 	return d.theType
 }
 
-func (d DOMError) SetType(theType string) {
+func (d *DOMError) SetType(theType string) {
 	d.theType = theType
 }
 
-func (d DOMError) GetRelatedException() IDOMObject {
+func (d *DOMError) GetRelatedException() IDOMObject {
 	return d.relatedException
 }
 
-func (d DOMError) SetRelatedException(relatedException IDOMObject) {
+func (d *DOMError) SetRelatedException(relatedException IDOMObject) {
 	d.relatedException = relatedException
 }
 
-func (d DOMError) GetRelatedData() IDOMObject {
+func (d *DOMError) GetRelatedData() IDOMObject {
 	return d.relatedData
 }
 
-func (d DOMError) SetRelatedData(relatedData IDOMObject) {
+func (d *DOMError) SetRelatedData(relatedData IDOMObject) {
 	d.relatedData = relatedData
 }
 
-func (d DOMError) GetLocation() IDOMLocator {
+func (d *DOMError) GetLocation() IDOMLocator {
 	return d.location
 }
 
-func (d DOMError) SetLocation(location IDOMLocator) {
+func (d *DOMError) SetLocation(location IDOMLocator) {
 	d.location = location
 }

@@ -29,50 +29,50 @@ type DocumentType struct {
 	internalSubset string
 }
 
-func (d DocumentType) GetName() string {
+func (d *DocumentType) GetName() string {
 	return d.name
 }
 
-func (d DocumentType) SetName(name string) {
+func (d *DocumentType) SetName(name string) {
 	d.name = name
 }
 
-func (d DocumentType) GetEntities() INamedNodeMap {
+func (d *DocumentType) GetEntities() INamedNodeMap {
 	return d.entities
 }
 
-func (d DocumentType) SetEntities(entities INamedNodeMap) {
+func (d *DocumentType) SetEntities(entities INamedNodeMap) {
 	d.entities = entities
 }
 
-func (d DocumentType) GetNotations() INamedNodeMap {
+func (d *DocumentType) GetNotations() INamedNodeMap {
 	return d.notations
 }
 
-func (d DocumentType) SetNotations(notations INamedNodeMap) {
+func (d *DocumentType) SetNotations(notations INamedNodeMap) {
 	d.notations = notations
 }
 
-func (d DocumentType) GetPublicId() string {
+func (d *DocumentType) GetPublicId() string {
 	return d.publicId
 }
 
-func (d DocumentType) SetPublicId(publicId string) {
+func (d *DocumentType) SetPublicId(publicId string) {
 	d.publicId = publicId
 }
 
-func (d DocumentType) GetSystemId() string {
+func (d *DocumentType) GetSystemId() string {
 	return d.systemId
 }
 
-func (d DocumentType) SetSystemId(systemId string) {
+func (d *DocumentType) SetSystemId(systemId string) {
 	d.systemId = systemId
 }
 
-func (d DocumentType) GetInternalSubset() string {
+func (d *DocumentType) GetInternalSubset() string {
 	return d.internalSubset
 }
 
-func (d DocumentType) SetInternalSubset(internalSubset string) {
+func (d *DocumentType) SetInternalSubset(internalSubset string) {
 	d.internalSubset = internalSubset
 }

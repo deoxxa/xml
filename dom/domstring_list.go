@@ -13,21 +13,21 @@ type DOMStringList struct {
 	length int32
 }
 
-func (d DOMStringList) GetLength() int32 {
+func (d *DOMStringList) GetLength() int32 {
 	return d.length
 }
 
-func (d DOMStringList) SetLength(length int32) {
+func (d *DOMStringList) SetLength(length int32) {
 	d.length = length
 }
 
-func (d DOMStringList) Item(index int32) string {
+func (d *DOMStringList) Item(index int32) string {
 	panic("unimplemented") // TODO
 
 	return ""
 }
 
-func (d DOMStringList) Contains(str string) bool {
+func (d *DOMStringList) Contains(str string) bool {
 	panic("unimplemented") // TODO
 
 	return false
